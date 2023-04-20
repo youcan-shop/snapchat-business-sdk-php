@@ -423,7 +423,7 @@ class ObjectSerializer
             // determine file name
             if (
                 is_array($httpHeaders)
-                && array_key_exists('Content-Disposition', $httpHeaders) 
+                && array_key_exists('Content-Disposition', $httpHeaders)
                 && preg_match('/inline; filename=[\'"]?([^\'"\s]+)[\'"]?$/i', $httpHeaders['Content-Disposition'], $match)
             ) {
                 $filename = Configuration::getDefaultConfiguration()->getTempFolderPath() . DIRECTORY_SEPARATOR . self::sanitizeFilename($match[1]);
@@ -499,6 +499,6 @@ class ObjectSerializer
         ?string $arg_separator = null,
         int $encoding_type = \PHP_QUERY_RFC3986
     ): string {
-        return \GuzzleHttp\Psr7\Query::build($data, $encoding_type);
+        return http_build_query($data, $numeric_prefix, $arg_separator, $encoding_type);
     }
 }
